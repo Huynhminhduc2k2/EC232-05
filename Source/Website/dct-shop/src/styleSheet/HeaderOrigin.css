@@ -1,0 +1,64 @@
+.Header{
+    background-color: #2B382B;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.Search_Navigator{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100px;
+}
+
+.Search{
+    background-color: white;
+    display: flex;
+    border-radius: 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.SearchBox{
+    border: none;
+    border-radius: 30px;
+    width: 700px;
+    font-size: 16px;
+    margin-left: 20px;
+    outline: none;
+}
+
+.SearchIcon{
+    margin: 0 10px 3px;
+}
+
+.Navigators{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    color: white;
+    max-width: 400px;
+    font-size: 1.2rem;
+    margin: 10px;
+}
+
+.SignUp_LogIn_Cart{
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.SignUp_LogIn_Navigator{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
+    color: white;
+    width: 200px;
+}
