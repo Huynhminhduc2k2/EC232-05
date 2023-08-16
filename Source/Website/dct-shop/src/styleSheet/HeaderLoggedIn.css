@@ -1,0 +1,7 @@
+.UserProfile_Cart{
+    margin-left: 40px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
