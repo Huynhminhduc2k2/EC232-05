@@ -1,0 +1,68 @@
+.MainPage-Container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+    align-items: center;
+    background-color: #8FBC8F;
+}
+
+.IntroductionImage{
+    margin-top: 50px;
+    width: 65%;
+}
+
+.ListCard{
+    width: 65%;
+}
+
+.ListCard-Title{
+    margin: 20px 0px;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+
+.ListCard-Container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5%;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.ItemName {
+    font-weight: bold;
+}
+
+.IntroductionImage{
+    margin-top: 50px;
+    width: 65%;
+}
+
+.ListCard{
+    width: 65%;
+}
+
+.ListCard-Title{
+    margin: 20px 0px;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+
+.ListCard-Container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5%;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.ItemName {
+    font-weight: bold;
+}

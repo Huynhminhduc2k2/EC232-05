@@ -1,7 +1,8 @@
-import SignUp from './layouts/SignUp'
+import SignUp from './layouts/SignUp';
+import MainPageOrigin from './layouts/MainPageOrigin';
 
 function App() {
-  return <SignUp />
+  return <SignUp />;
 }
 
-export default App
+export default App;
