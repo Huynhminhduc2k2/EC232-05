@@ -1,8 +1,8 @@
-import React from 'react'
-import '../styleSheet/HeaderOrigin.css'
-import LogoHeader from '../assets/LogoHeader.png'
-import SearchIcon from '../assets/SearchIcon.png'
-import Cart from '../assets/Cart.png'
+import React from 'react';
+import '../styleSheet/HeaderOrigin.css';
+import LogoHeader from '../assets/LogoHeader.png';
+import SearchIcon from '../assets/SearchIcon.png';
+import Cart from '../assets/Cart.png';
 
 function HeaderOrigin() {
   return (
@@ -50,7 +50,7 @@ function HeaderOrigin() {
         </div>
       </section>
     </>
-  )
+  );
 }
 
-export default HeaderOrigin
+export default HeaderOrigin;
