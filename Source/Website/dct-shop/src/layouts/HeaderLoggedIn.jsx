@@ -1,10 +1,11 @@
 import React from 'react';
-import '../styleSheet/HeaderOrigin.css';
+import '../styleSheet/HeaderLoggedIn.css';
 import LogoHeader from '../assets/LogoHeader.png';
 import SearchIcon from '../assets/SearchIcon.png';
 import Cart from '../assets/Cart.png';
+import ProfilePic from '../assets/Profile.png';
 
-function HeaderOrigin() {
+function HeaderLoggedIn() {
   return (
     <>
       <section className="Header">
@@ -34,11 +35,14 @@ function HeaderOrigin() {
             <div>Giới thiệu</div>
           </nav>
         </div>
-        <div className="SignUp_LogIn_Cart">
-          <div className="SignUp_LogIn_Navigator">
-            <div>Đăng ký</div>
-            <hr />
-            <div>Đăng nhập</div>
+        <div className="UserProfile_Cart">
+          <div className="UserProfile">
+            <img
+              src={ProfilePic}
+              alt="Profile Picture"
+              height={60}
+              width={60}
+            />
           </div>
           <img
             className="Cart"
@@ -53,4 +57,4 @@ function HeaderOrigin() {
   );
 }
 
-export default HeaderOrigin;
+export default HeaderLoggedIn;

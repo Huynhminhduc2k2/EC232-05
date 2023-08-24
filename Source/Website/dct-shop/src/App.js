@@ -1,7 +1,13 @@
-import SignUp from './layouts/SignUp'
+import SignUp from './layouts/SignUp';
+import MainPageOrigin from './layouts/MainPageOrigin';
+import MainPageLoggedIn from './layouts/MainPageLoggedIn';
+import Cart from './layouts/Cart';
 
 function App() {
-  return <SignUp />
+  // return <MainPageLoggedIn />;
+  return <MainPageOrigin />;
+  // return <Cart />;
+  // return <SignUp />;
 }
 
-export default App
+export default App;

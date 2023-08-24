@@ -1,0 +1,97 @@
+.MainPage-Container *{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.MainPage-Container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+    align-items: center;
+    background-color: #8FBC8F;
+}
+
+.IntroductionImage{
+    margin-top: 50px;
+    width: 65%;
+}
+
+.ListCard{
+    width: 65%;
+}
+
+.ListCard-Title{
+    margin: 20px 0px;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+
+.ListCard-Container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5%;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.ItemName {
+    font-weight: bold;
+}
+
+.IntroductionImage{
+    margin-top: 50px;
+    width: 65%;
+}
+
+.ListCard{
+    width: 65%;
+}
+
+.ListCard-Title{
+    margin: 20px 0px;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+
+.ListCard-Container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5%;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.ItemName {
+    font-weight: bold;
+}
+
+/* Media query cho màn hình có chiều rộng nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .MainPage-Container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .IntroductionImage {
+      width: 100%;
+      margin-top: 20px;
+    }
+  
+    .ListCard {
+      width: 100%;
+    }
+  
+    .ListCard-Container {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      gap: 10px;
+      font-size: 1rem;
+    }
+  }
