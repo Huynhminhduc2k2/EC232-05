@@ -1,7 +1,8 @@
 .Footer{
     background-color: black;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
+    text-align: center;
 }
 
 .Footer-container{
@@ -36,6 +37,7 @@
     gap:20px;
     height: fit-content;
     width: max-content;
+    align-items: center;
 }
 
 .line{
@@ -49,4 +51,21 @@
 
 .grid-title{
     color:#56B280;
+}
+
+/* Media query cho màn hình có chiều rộng nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .Footer-description,
+    .grid-container-contact {
+        margin: 10px 0;
+    }
+    .Shop-Logo, .Description {
+        width: 100%;
+        font-size: 1.2rem;
+    }    
+
+    .Footer-container{
+        align-items: center;
+        justify-content: center;
+    }
 }
