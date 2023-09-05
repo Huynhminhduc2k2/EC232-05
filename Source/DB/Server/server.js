@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   // Xử lý tuyến đường GET "/"
   res.send("Hello, World!");
 });
-
+// Định nghĩa cái ThanhVien
 const ThanhVien = mongoose.model('ThanhVien', new mongoose.Schema({
   HoTen: String,
   GioiTinh: String,
@@ -401,7 +401,7 @@ app.post("/post", async (req, res) => {
 
 });
 
-const port = process.env.PORT || 3000; // Sử dụng cổng môi trường hoặc mặc định là 3000
+const port = process.env.PORT; 
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
