@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import bcrypt from "bcrypt";
 
 dotenv.config();
 
@@ -73,7 +74,7 @@ app.post("/Register", async (req, res) => {
 });
   
 // Login
-router.post("/Login", async (req, res) => {
+app.post("/Login", async (req, res) => {
     const { TenTaiKhoan, MatKhau } = req.body;
 
     // Kiểm tra tính hợp lệ của dữ liệu đầu vào

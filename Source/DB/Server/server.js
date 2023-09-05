@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import bodyParser from "body-parser"; // Thêm body-parser để xử lý dữ liệu gửi lên
+import bcrypt from "bcrypt";
 
 dotenv.config();
 
@@ -38,7 +39,7 @@ const ThanhVien = mongoose.model('ThanhVien', new mongoose.Schema({
 }));
 
 const NhanVienQuanLy = mongoose.model('NhanVienQuanLy', new mongoose.Schema({
-  HoTen: String,
+  HoTen: String,  
   GioiTinh: String,
   SDT: String,
   Email: String,
@@ -454,6 +455,40 @@ app.post("/ThanhVien", async (req, res) => {
 });
 
 const port = process.env.PORT; 
+
+// Login
+app.post("/Login", async (req, res) => {
+  const { TenTaiKhoan, MatKhau } = req.body;
+
+  // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+  if (!TenTaiKhoan || !MatKhau) {
+      return res.status(400).json({ error: "Vui lòng cung cấp tên tài khoản và mật khẩu." });
+  }
+
+  try {
+      // Tìm tài khoản dựa trên Tên Tài Khoản
+      const taiKhoan = await TaiKhoan.findOne({ TenTaiKhoan });
+
+      // Kiểm tra xem tài khoản tồn tại và so sánh mật khẩu
+      if (!taiKhoan) {
+          return res.status(401).json({ error: "Tài khoản hoặc mật khẩu không chính xác." });
+      }
+
+      // Sử dụng bcrypt để so sánh mật khẩu
+      const passwordMatch = await bcrypt.compare(MatKhau, taiKhoan.MatKhau);
+      if (!passwordMatch) {
+          return res.status(401).json({ error: "Tài khoản hoặc mật khẩu không chính xác." });
+      }
+
+      // Đăng nhập thành công, trả về thông tin tài khoản
+      res.status(200).json({ message: "Đăng nhập thành công.", taiKhoan });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Đã có lỗi xảy ra khi đăng nhập." });
+  }
+});
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
