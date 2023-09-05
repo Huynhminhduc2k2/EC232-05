@@ -196,6 +196,24 @@ console.error('Lỗi kết nối đến MongoDB:', error);
 });*/
 
 
+app.post("/taikhoan", async (req, res) => {
+  console.log("inside post function");
+
+  const data_TaiKhoan = new TaiKhoan({
+    TenTaiKhoan: req.body.TenTaiKhoan,
+    MatKhau: req.body.MatKhau,
+    MaThanhVien: req.body.MaThanhVien
+  });
+ 
+  try {
+    const val = await data_TaiKhoan.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+})
+
 app.post("/post", async (req, res) => {
   console.log("inside post function");
 
@@ -230,19 +248,7 @@ app.post("/post", async (req, res) => {
     res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
   }
 
-  const data_TaiKhoan = new TaiKhoan({
-    TenTaiKhoan: req.body.TenTaiKhoan,
-    MatKhau: req.body.MatKhau,
-    MaThanhVien: req.body.MaThanhVien
-  });
- 
-  try {
-    const val = await data_TaiKhoan.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
+  
 
   const data_GioHang = new GioHang({
     NgayThem: req.body.NgayThem,
@@ -400,6 +406,7 @@ app.post("/post", async (req, res) => {
   }
 
 });
+
 
 const port = process.env.PORT; 
 
