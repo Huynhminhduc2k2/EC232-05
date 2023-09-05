@@ -28,9 +28,10 @@ function SignIn() {
                 <hr />
               </div>
               <div className="SignUp-btn">
-                <button>ĐĂNG KÝ</button>
+                <button>ĐĂNG NHẬP</button>
               </div>
             </div>
+            
           </div>
   
           <Footer />

@@ -5,7 +5,11 @@
     flex-direction: row;
     gap: 50px;
 }
-
+.button
+{
+    background-color:#2B382B;
+    
+}
 /* Media query cho màn hình có chiều rộng nhỏ hơn 768px */
 @media (max-width: 768px) {
     .UserProfile_Cart{
