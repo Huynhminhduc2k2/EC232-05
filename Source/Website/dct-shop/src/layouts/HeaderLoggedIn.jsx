@@ -78,7 +78,7 @@ function HeaderLoggedIn() {
             <div
               className="rounded-circle bg-danger d-flex justify-content-center align-items-center"
               style={{
-                color: "red",
+                color: "white",
                 width: "1.5rem",
                 height: "1.5rem",
                 position: "absolute",
