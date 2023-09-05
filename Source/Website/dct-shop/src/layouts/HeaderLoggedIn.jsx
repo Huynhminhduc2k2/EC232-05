@@ -4,12 +4,19 @@ import LogoHeader from '../assets/LogoHeader.png';
 import SearchIcon from '../assets/SearchIcon.png';
 import Cart from '../assets/Cart.png';
 import ProfilePic from '../assets/Profile.png';
+import { NavLink } from 'react-bootstrap';
+import { Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
 
 function HeaderLoggedIn() {
   return (
     <>
       <section className="Header">
-        <img className="Shop-Logo" src={LogoHeader} alt="logo header" />
+        <Nav>
+          <Nav.Link href={'/homeloggedin'}>
+            <img className="Shop-Logo" src={LogoHeader} alt="logo header" />
+          </Nav.Link>
+        </Nav>
+
         <div className="Search_Navigator">
           <div className="Search">
             <input
@@ -26,13 +33,23 @@ function HeaderLoggedIn() {
             />
           </div>
 
-          <nav className="Navigators">
-            <div>Trang chủ</div>
+          <NavbarBs className="Navigators">
+            <Nav>
+              <Nav.Link href={'/homeloggedin'}>Trang chủ</Nav.Link>
+            </Nav>
             <hr />
-            <div>Cửa hàng</div>
+            <Nav>
+              <Nav.Link to="/" as={NavLink}>
+                Cửa hàng
+              </Nav.Link>
+            </Nav>
             <hr />
-            <div>Giới thiệu</div>
-          </nav>
+            <Nav>
+              <Nav.Link to="/" as={NavLink}>
+                Giới thiệu
+              </Nav.Link>
+            </Nav>
+          </NavbarBs>
         </div>
 
         <div className="UserProfile_Cart">
