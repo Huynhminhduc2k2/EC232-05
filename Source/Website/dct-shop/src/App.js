@@ -13,6 +13,7 @@ import MainPageLoggedIn from './layouts/MainPageLoggedIn';
 import Cart from './layouts/Cart';
 import SignIn from './layouts/SignIn';
 import HeaderOrigin from './layouts/HeaderOrigin';
+import ItemDetail from './layouts/ItemDetail';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<MainPageOrigin />} default />
           <Route path="/homeloggedin" element={<MainPageLoggedIn />} default />
+          <Route path="/itemdetail" element={<ItemDetail />} default />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/cart" element={<Cart />} />
