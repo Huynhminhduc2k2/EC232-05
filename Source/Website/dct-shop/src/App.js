@@ -23,6 +23,7 @@ function App() {
           <Route path="/homeloggedin" element={<MainPageLoggedIn />} default />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </Router>

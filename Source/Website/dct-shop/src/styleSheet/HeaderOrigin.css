@@ -4,7 +4,11 @@
     margin: 0;
     padding: 0;
 }
-
+.button
+{
+    background-color:#2B382B;
+    
+}
 .Header{
     background-color: #2B382B;
     height: 15vh;
@@ -14,7 +18,12 @@
     gap: 20px;
     text-align: center;
 }
-
+.rounded-circle
+{
+    background-color: red;
+    border: 2px solid black;
+    border-radius: 50%;
+}
 .Search_Navigator{
     display: flex;
     flex-direction: column;
