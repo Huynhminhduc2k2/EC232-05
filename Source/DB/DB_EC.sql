@@ -39,7 +39,9 @@ CREATE TABLE DonHang (
   MaDon INT PRIMARY KEY AUTO_INCREMENT,
   TinhTrangDon VARCHAR(255),
   MaThanhVien INT,
-  FOREIGN KEY (MaThanhVien) REFERENCES ThanhVien(MaThanhVien)
+  MaPhuongThuc INT, -- Thêm trường MaPhuongThuc để lưu thông tin phương thức thanh toán
+  FOREIGN KEY (MaThanhVien) REFERENCES ThanhVien(MaThanhVien),
+  FOREIGN KEY (MaPhuongThuc) REFERENCES PhuongThucThanhToan(MaPhuongThuc) -- Liên kết với bảng PhuongThucThanhToan
 );
 
 CREATE TABLE SanPham (
@@ -110,4 +112,10 @@ CREATE TABLE DanhSachQuanLy (
   PRIMARY KEY (MaNhanVien, MaTaiKhoan),
   FOREIGN KEY (MaNhanVien) REFERENCES NhanVienQuanLy(MaNhanVien),
   FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan)
+);
+
+CREATE TABLE PhuongThucThanhToan (
+  MaPhuongThuc INT PRIMARY KEY AUTO_INCREMENT,
+  TenPhuongThuc VARCHAR(255),
+  MoTa TEXT
 );

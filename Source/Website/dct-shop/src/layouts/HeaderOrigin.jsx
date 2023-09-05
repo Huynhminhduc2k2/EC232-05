@@ -3,7 +3,8 @@ import '../styleSheet/HeaderOrigin.css';
 import LogoHeader from '../assets/LogoHeader.png';
 import SearchIcon from '../assets/SearchIcon.png';
 import Cart from '../assets/Cart.png';
-
+import {NavLink} from 'react-bootstrap';
+import {Container,Nav,Navbar as NavbarBs} from "react-bootstrap"
 function HeaderOrigin() {
   return (
     <>
@@ -24,21 +25,37 @@ function HeaderOrigin() {
               width={30}
             />
           </div>
-          <nav className="Navigators">
-            <div>Trang chủ</div>
-            <hr />
-            <div>Sản phẩm</div>
-            <hr />
-            <div>Cửa hàng</div>
-            <hr />
-            <div>Giới thiệu</div>
-          </nav>
+          
+            
+         
+          <NavbarBs className="Navigators">
+           
+          <Nav> 
+           <Nav.Link href={"/home"}>Trang Chủ</Nav.Link> 
+          </Nav>
+          <hr />
+          <Nav> 
+           <Nav.Link to="/" as={NavLink}>Cửa hàng</Nav.Link> 
+          </Nav>
+          <hr />
+          <Nav> 
+           <Nav.Link to="/" as={NavLink}>Giới thieu</Nav.Link> 
+          </Nav>
+           
+          
+          
+           
+          </NavbarBs>
         </div>
         <div className="SignUp_LogIn_Cart">
           <div className="SignUp_LogIn_Navigator">
-            <div>Đăng ký</div>
+          <Nav> 
+           <Nav.Link href={"/signup"} >Đăng ký</Nav.Link> 
+          </Nav>
             <hr />
-            <div>Đăng nhập</div>
+            <Nav> 
+           <Nav.Link href={"/signin"} >Đăng nhập</Nav.Link> 
+          </Nav>
           </div>
           <img
             className="Cart"
@@ -47,8 +64,11 @@ function HeaderOrigin() {
             height={50}
             width={50}
           />
+          
         </div>
+        
       </section>
+      
     </>
   );
 }
