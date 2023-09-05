@@ -1,3 +1,29 @@
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+
+dotenv.config();
+
+const uri = process.env.MONGODB_URI; // Thay thế URI kết nối MongoDB bằng biến môi trường
+
+async function connect() {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error(error);
+  }
+}
+connect();
+
+const app = express();
+
+app.use(bodyParser.json());
+
 // Register
 app.post("/Register", async (req, res) => {
     const { TenTaiKhoan, MatKhau, HoTen, GioiTinh, NamSinh, SDT, Email } = req.body;
