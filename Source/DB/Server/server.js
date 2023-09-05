@@ -14,7 +14,7 @@ async function connect() {
     console.error(error);
   }
 }
-connect();  // Thêm dấu () để gọi hàm connect()
+connect();  // gọi hàm connect()
 
 const app = express();
 
