@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    background-color: #8FBC8F;
+}
+
+.FormSignIn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 600px;
+    height: 450px;
+    border-radius: 2%;
+    justify-content: center;
+    gap:20px;
+}
+
+.Form{
+    display: flex;
+    flex-direction: column;
+}
+
+.FormTitle{
+    justify-content: flex-start;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.accountName, .accountPass{
+    border: none;
+    font-size: 20px;
+    outline: none;
+    margin-top: 30px;
+}
+
+.SignIn-btn{
+    margin-top: 25px;
+    background-color: #207E20;
+    padding: 6px 10vh;
+    border-radius: 20px;
+}
+
+button{
+    background-color: #207E20;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color:white;
+}
