@@ -1,0 +1,23 @@
+.UserProfile_Cart{
+    margin-left: 40px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+/* Media query cho màn hình có chiều rộng nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .UserProfile_Cart{
+        margin: auto;
+        justify-content: space-evenly;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .UserProfile{
+        width: 50px;
+        height: 50px;
+    }
+  }

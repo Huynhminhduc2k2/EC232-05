@@ -1,0 +1,19 @@
+.Cart-Container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    font-size: 1.2rem;
+    background-color: #8FBC8F;
+}
+
+.Logo_Title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
