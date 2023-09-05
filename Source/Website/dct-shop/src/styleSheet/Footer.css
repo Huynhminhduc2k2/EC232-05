@@ -59,7 +59,8 @@
     .grid-container-contact {
         margin: 10px 0;
     }
-    .Shop-Logo, .Description {
+
+    .Description {
         width: 100%;
         font-size: 1.2rem;
     }    

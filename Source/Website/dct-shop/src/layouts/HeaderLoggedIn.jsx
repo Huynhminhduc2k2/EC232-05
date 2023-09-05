@@ -25,16 +25,16 @@ function HeaderLoggedIn() {
               width={30}
             />
           </div>
+
           <nav className="Navigators">
             <div>Trang chủ</div>
-            <hr />
-            <div>Sản phẩm</div>
             <hr />
             <div>Cửa hàng</div>
             <hr />
             <div>Giới thiệu</div>
           </nav>
         </div>
+
         <div className="UserProfile_Cart">
           <div className="UserProfile">
             <img
