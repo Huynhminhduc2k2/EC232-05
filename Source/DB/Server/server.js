@@ -214,7 +214,226 @@ app.post("/taikhoan", async (req, res) => {
   }
 })
 
-app.post("/post", async (req, res) => {
+
+app.post("/NhanVienQuanLy", async (req, res) => {
+  console.log("inside post function");
+  const data_NhanVien = new NhanVienQuanLy({
+    HoTen: req.body.HoTen,
+    GioiTinh: req.body.GioiTinh,
+    SDT: req.body.SDT,
+    Email: req.body.Email
+  });
+ 
+  try {
+    const val = await data_NhanVien.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/GioHang", async (req, res) => {
+  console.log("inside post function");
+  const data_GioHang = new GioHang({
+    NgayThem: req.body.NgayThem,
+    TinhTrangGio: req.body.TinhTrangGio,
+    MaThanhVien: req.body.MaThanhVien
+  });
+ 
+  try {
+    const val = await data_GioHang.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/DonHang", async (req, res) => {
+  console.log("inside post function");
+  const data_DonHang = new DonHang({
+    TinhTrangDon: req.body.TinhTrangDon,
+    MaThanhVien: req.body.MaThanhVien,
+    MaPhuongThuc: req.body.MaPhuongThuc
+  });
+ 
+  try {
+    const val = await data_DonHang.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/SanPham", async (req, res) => {
+  console.log("inside post function");
+  const data_SanPham = new SanPham({
+    TenSanPham: req.body.TenSanPham,
+    Gia: req.body.Gia,
+    DonVi: req.body.DonVi,
+    XuatSu: req.body.XuatSu
+  });
+ 
+  try {
+    const val = await data_SanPham.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/BinhLuan", async (req, res) => {
+  console.log("inside post function");
+  const data_BinhLuan = new BinhLuan({
+    NoiDung: req.body.NoiDung,
+    MaThanhVien: req.body.MaThanhVien,
+    MaSanPham: req.body.MaSanPham
+  });
+ 
+  try {
+    const val = await data_BinhLuan.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/DanhGia", async (req, res) => {
+  console.log("inside post function");
+  const data_DanhGia = new DanhGia({
+    Diem: req.body.Diem,
+    MaThanhVien: req.body.MaThanhVien,
+    MaSanPham: req.body.MaSanPham
+  });
+ 
+  try {
+    const val = await data_DanhGia.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/DanhMucSanPham", async (req, res) => {
+  console.log("inside post function");
+  const data_DanhMucSanPham = new DanhMucSanPham({
+    TenDanhMuc: req.body.TenDanhMuc,
+    SoLuong: req.body.SoLuong
+  });
+ 
+  try {
+    const val = await data_DanhMucSanPham.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/ChiTietDanhMuc", async (req, res) => {
+  console.log("inside post function");
+  const data_ChiTietDanhMuc = new ChiTietDanhMuc({
+    MaDanhMuc: req.body.MaDanhMuc,
+    MaSanPham: req.body.MaSanPham,
+    NgayNhap: req.body.NgayNhap,
+    GhiChu: req.body.GhiChu
+  });
+ 
+  try {
+    const val = await data_ChiTietDanhMuc.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/ChiTietGioHang", async (req, res) => {
+  console.log("inside post function");
+  const data_ChiTietGioHang = new ChiTietGioHang({
+    MaGioHang: req.body.MaGioHang,
+    MaSanPham: req.body.MaSanPham,
+    SoLuongHang: req.body.SoLuongHang
+  });
+ 
+  try {
+    const val = await data_ChiTietGioHang.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/ChiTietDonHang", async (req, res) => {
+  console.log("inside post function");
+  const data_ChiTietDonHang = new ChiTietDonHang({
+    MaDonHang: req.body.MaDonHang,
+    MaSanPham: req.body.MaSanPham,
+    ThanhTien: req.body.ThanhTien,
+    NgayLap: req.body.ThanhTien
+  });
+ 
+  try {
+    const val = await data_ChiTietDonHang.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/DanhSachQuanLy", async (req, res) => {
+  console.log("inside post function");
+  const data_DanhSachQuanLy = new DanhSachQuanLy({
+    MaThanhVien: req.body.MaThanhVien,
+    MaTaiKhoan: req.body.MaTaiKhoan,
+    ThoiGian: req.body.ThoiGian
+  });
+ 
+  try {
+    const val = await data_DanhSachQuanLy.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/PhuongThucThanhToan", async (req, res) => {
+  console.log("inside post function");
+  const data_PhuongThucThanhToan = new PhuongThucThanhToan({
+    TenPhuongThuc: req.body.TenPhuongThuc,
+    MoTa: req.body.MoTa
+  });
+ 
+  try {
+    const val = await data_PhuongThucThanhToan.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
+  }
+
+})
+
+app.post("/ThanhVien", async (req, res) => {
   console.log("inside post function");
 
   const data_ThanhVien = new ThanhVien({
@@ -232,181 +451,7 @@ app.post("/post", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
   }
-
-  const data_NhanVien = new NhanVienQuanLy({
-    HoTen: req.body.HoTen,
-    GioiTinh: req.body.GioiTinh,
-    SDT: req.body.SDT,
-    Email: req.body.Email
-  });
- 
-  try {
-    const val = await data_NhanVien.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  
-
-  const data_GioHang = new GioHang({
-    NgayThem: req.body.NgayThem,
-    TinhTrangGio: req.body.TinhTrangGio,
-    MaThanhVien: req.body.MaThanhVien
-  });
- 
-  try {
-    const val = await data_GioHang.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_DonHang = new DonHang({
-    TinhTrangDon: req.body.TinhTrangDon,
-    MaThanhVien: req.body.MaThanhVien,
-    MaPhuongThuc: req.body.MaPhuongThuc
-  });
- 
-  try {
-    const val = await data_DonHang.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_SanPham = new SanPham({
-    TenSanPham: req.body.TenSanPham,
-    Gia: req.body.Gia,
-    DonVi: req.body.DonVi,
-    XuatSu: req.body.XuatSu
-  });
- 
-  try {
-    const val = await data_SanPham.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_BinhLuan = new BinhLuan({
-    NoiDung: req.body.NoiDung,
-    MaThanhVien: req.body.MaThanhVien,
-    MaSanPham: req.body.MaSanPham
-  });
- 
-  try {
-    const val = await data_BinhLuan.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_DanhGia = new DanhGia({
-    Diem: req.body.Diem,
-    MaThanhVien: req.body.MaThanhVien,
-    MaSanPham: req.body.MaSanPham
-  });
- 
-  try {
-    const val = await data_DanhGia.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_DanhMucSanPham = new DanhMucSanPham({
-    TenDanhMuc: req.body.TenDanhMuc,
-    SoLuong: req.body.SoLuong
-  });
- 
-  try {
-    const val = await data_DanhMucSanPham.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_ChiTietDanhMuc = new ChiTietDanhMuc({
-    MaDanhMuc: req.body.MaDanhMuc,
-    MaSanPham: req.body.MaSanPham,
-    NgayNhap: req.body.NgayNhap,
-    GhiChu: req.body.GhiChu
-  });
- 
-  try {
-    const val = await data_ChiTietDanhMuc.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_ChiTietGioHang = new ChiTietGioHang({
-    MaGioHang: req.body.MaGioHang,
-    MaSanPham: req.body.MaSanPham,
-    SoLuongHang: req.body.SoLuongHang
-  });
- 
-  try {
-    const val = await data_ChiTietGioHang.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_ChiTietDonHang = new ChiTietDonHang({
-    MaDonHang: req.body.MaDonHang,
-    MaSanPham: req.body.MaSanPham,
-    ThanhTien: req.body.ThanhTien,
-    NgayLap: req.body.ThanhTien
-  });
- 
-  try {
-    const val = await data_ChiTietDonHang.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_DanhSachQuanLy = new DanhSachQuanLy({
-    MaThanhVien: req.body.MaThanhVien,
-    MaTaiKhoan: req.body.MaTaiKhoan,
-    ThoiGian: req.body.ThoiGian
-  });
- 
-  try {
-    const val = await data_DanhSachQuanLy.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
-  const data_PhuongThucThanhToan = new PhuongThucThanhToan({
-    TenPhuongThuc: req.body.TenPhuongThuc,
-    MoTa: req.body.MoTa
-  });
- 
-  try {
-    const val = await data_PhuongThucThanhToan.save();
-    res.json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Lỗi khi lưu dữ liệu.' });
-  }
-
 });
-
 
 const port = process.env.PORT; 
 
