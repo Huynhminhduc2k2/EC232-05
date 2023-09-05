@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   // Xử lý tuyến đường GET "/"
   res.send("Hello, World!");
 });
-
+// Định nghĩa cái ThanhVien
 const ThanhVien = mongoose.model('ThanhVien', new mongoose.Schema({
   HoTen: String,
   GioiTinh: String,
