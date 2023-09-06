@@ -1,5 +1,5 @@
 # Tên nhóm: EC232-05
-## Giới thiệu project dct-shop
+## Giới thiệu project dct-shop (Yu-gi-oh Trading Card Shop!)
 
 Project website dct-shop môn Thương mại điện tử HTTT2 của Sleep Team
 
@@ -12,6 +12,12 @@ Project website dct-shop môn Thương mại điện tử HTTT2 của Sleep Team
 
 ## Hướng dẫn chạy project sau khi clone:
 
-**Bước 1:** Mở thư mục **dct-shop** bằng vscode <br>
-**Bước 2:** Nhập **npm install** trong TERMINAL để khởi tạo node_modules <br>
-**Bước 3:** Nhập **npm start** trong TERMINAL để chạy project
+Mở thư mục **Source** bằng vscode <br>
+**Bước 1:** Chạy Server MongoDB <br>
+a) Mở terminal nhập **cd db/server** <br>
+b) Nhập **npm run server** <br>
+
+**Bước 2:** Chạy Website DCT-Shop <br>
+a) Mở terminal nhập **cd website/dct-shop** <br>
+b) Nhập **npm install** trong TERMINAL để khởi tạo node_modules <br>
+c) Nhập **npm start** trong TERMINAL để chạy project
