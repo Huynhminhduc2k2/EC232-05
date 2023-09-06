@@ -8,8 +8,8 @@ const sanPhamSchema = mongoose.Schema(
       Gia: {
         type: Number,
       },
-      DonVi: {
-        type: String,
+      SoLuong: {
+        type: Number,
       },
       XuatSu: {
         type: String,
