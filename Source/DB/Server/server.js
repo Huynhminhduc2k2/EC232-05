@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser"; // Thêm body-parser để xử lý dữ liệu gửi lên
 import bcrypt from "bcrypt";
 
+
 dotenv.config();
 
 const uri = process.env.MONGODB_URI; // Thay thế URI kết nối MongoDB bằng biến môi trường
@@ -165,36 +166,6 @@ const PhuongThucThanhToan = mongoose.model('PhuongThucThanhToan', new mongoose.S
   TenPhuongThuc: String,
   MoTa: String,
 }));
-
-// Tạo dữ liệu mẫu cho bảng PhuongThucThanhToan
-/*PhuongThucThanhToan.create([
-  {
-    TenPhuongThuc: 'Thanh toán bằng thẻ tín dụng',
-    MoTa: 'Phương thức thanh toán qua thẻ tín dụng',
-  },
-  {
-    TenPhuongThuc: 'Thanh toán bằng chuyển khoản ngân hàng',
-    MoTa: 'Phương thức thanh toán qua chuyển khoản ngân hàng',
-  },
-  {
-    TenPhuongThuc: 'Thanh toán bằng khi nhận hàng',
-    MoTa: 'Phương thức thanh toán trực tiếp khi nhận hàng',
-  },
-  {
-    TenPhuongThuc: 'Thanh toán bằng ví điện tử',
-    MoTa: 'Phương thức thanh toán ví điện tử',
-  },
-])
-  .then(() => {
-    console.log('Dữ liệu mẫu cho bảng PhuongThucThanhToan đã được tạo.');
-  })
-  .catch((error) => {
-    console.error('Lỗi khi tạo dữ liệu mẫu cho bảng PhuongThucThanhToan:', error);
-  });
-})
-.catch((error) => {
-console.error('Lỗi kết nối đến MongoDB:', error);
-});*/
 
 
 app.post("/taikhoan", async (req, res) => {
@@ -456,37 +427,137 @@ app.post("/ThanhVien", async (req, res) => {
 
 const port = process.env.PORT; 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Register
+app.post("/api/register", async (req, res) => {
+  const { TenTaiKhoan, MatKhau, HoTen, GioiTinh, NamSinh, SDT, Email } = req.body;
+
+  // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+  if (!TenTaiKhoan || !MatKhau || !HoTen || !SDT || !Email) {
+      return res.status(400).json({ error: "Vui lòng cung cấp đủ thông tin đăng ký." });
+  }
+
+  try {
+      // Kiểm tra xem tài khoản đã tồn tại hay chưa
+      const existingAccount = await TaiKhoan.findOne({ TenTaiKhoan });
+      if (existingAccount) {
+          return res.status(400).json({ error: "Tên tài khoản đã tồn tại." });
+      }
+
+      // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+      const hashedPassword = await bcrypt.hash(MatKhau, 10);
+
+      // Tạo một thành viên mới
+      const thanhVien = new ThanhVien({
+          HoTen,
+          GioiTinh,
+          NamSinh,
+          SDT,
+          Email,
+      });
+
+      // Lưu thông tin thành viên
+      await thanhVien.save();
+
+      // Tạo tài khoản và liên kết với thành viên
+      const taiKhoan = new TaiKhoan({
+          TenTaiKhoan,
+          MatKhau: hashedPassword,
+          MaThanhVien: thanhVien._id,
+      });
+
+      // Lưu thông tin tài khoản
+      await taiKhoan.save();
+
+      res.status(201).json({ message: "Tài khoản đã được đăng ký thành công." });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Đã có lỗi xảy ra khi đăng ký tài khoản." });
+  }
+});
+
+
 // Login
-app.post("/Login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { TenTaiKhoan, MatKhau } = req.body;
 
   // Kiểm tra tính hợp lệ của dữ liệu đầu vào
   if (!TenTaiKhoan || !MatKhau) {
-      return res.status(400).json({ error: "Vui lòng cung cấp tên tài khoản và mật khẩu." });
+    return res.status(400).json({ error: "Vui lòng cung cấp tên tài khoản và mật khẩu." });
   }
 
   try {
-      // Tìm tài khoản dựa trên Tên Tài Khoản
-      const taiKhoan = await TaiKhoan.findOne({ TenTaiKhoan });
+    // Tìm tài khoản dựa trên Tên Tài Khoản
+    const taiKhoan = await TaiKhoan.findOne({ TenTaiKhoan });
 
-      // Kiểm tra xem tài khoản tồn tại và so sánh mật khẩu
-      if (!taiKhoan) {
-          return res.status(401).json({ error: "Tài khoản hoặc mật khẩu không chính xác." });
-      }
+    // Kiểm tra xem tài khoản tồn tại và so sánh mật khẩu
+    if (!taiKhoan) {
+      return res.status(401).json({ error: "Tài khoản hoặc mật khẩu không chính xác." });
+    }
 
-      // Sử dụng bcrypt để so sánh mật khẩu
-      const passwordMatch = await bcrypt.compare(MatKhau, taiKhoan.MatKhau);
-      if (!passwordMatch) {
-          return res.status(401).json({ error: "Tài khoản hoặc mật khẩu không chính xác." });
-      }
+    // Sử dụng bcrypt để so sánh mật khẩu
+    const passwordMatch = await bcrypt.compare(MatKhau, taiKhoan.MatKhau);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Tài khoản hoặc mật khẩu không chính xác." });
+    }
 
-      // Đăng nhập thành công, trả về thông tin tài khoản
-      res.status(200).json({ message: "Đăng nhập thành công.", taiKhoan });
+    // Đăng nhập thành công, trả về thông tin tài khoản
+    res.status(200).json({ message: "Đăng nhập thành công.", taiKhoan });
   } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Đã có lỗi xảy ra khi đăng nhập." });
+    console.error(error);
+    res.status(500).json({ error: "Đã có lỗi xảy ra khi đăng nhập." });
   }
 });
+
+// Thêm sản phẩm vào giỏ hàng
+app.post("/api/cart/add", async (req, res) => {
+  const userId = req.body.userId;
+  const productId = req.body.productId;
+  const quantity = req.body.quantity;
+
+  // Kiểm tra xem sản phẩm có tồn tại không
+  const product = await SanPham.findById(productId);
+
+  if (!product) {
+    return res.status(404).json({ error: "Sản phẩm không tồn tại." });
+  }
+
+  // Tìm giỏ hàng của người dùng
+  let gioHang = await GioHang.findOne({ MaThanhVien: userId });
+
+  if (!gioHang) {
+    // Nếu giỏ hàng không tồn tại, hãy tạo một giỏ hàng mới
+    gioHang = new GioHang({
+      MaThanhVien: userId,
+      items: [],
+    });
+  }
+
+  // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+  const itemIndex = gioHang.items.findIndex(
+    (item) => item.MaSanPham.toString() === productId
+  );
+
+  if (itemIndex !== -1) {
+    // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng
+    gioHang.items[itemIndex].SoLuong += quantity;
+  } else {
+    // Nếu sản phẩm chưa có trong giỏ hàng, thêm sản phẩm mới vào
+    gioHang.items.push({ MaSanPham: productId, SoLuong: quantity });
+  }
+
+  // Lưu giỏ hàng
+  await gioHang.save();
+
+  res.json(gioHang);
+});
+
+
+
+
+
+
 
 
 
