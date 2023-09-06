@@ -473,9 +473,6 @@ app.get('/api/products', async (req, res) => {
 });
 
 
-
-
-
 // Register
 app.post('/api/register', async (req, res) => {
   const { TenTaiKhoan, MatKhau, HoTen, GioiTinh, NamSinh, SDT, Email } =
@@ -640,6 +637,25 @@ app.post('/api/cart/remove', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Đã có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng.' });
+  }
+});
+// search theo tên -- đang lỗi -- chưa fix
+app.get('/api/products/search', async (req, res) => {
+  const productName = req.query.name; // Lấy tên sản phẩm từ query parameter
+
+  try {
+    const products = await SanPham.find({
+      TenSanPham: { $regex: productName, $options: 'i' }, // Sử dụng regex và tắt sự phân biệt chữ hoa chữ thường
+    });
+
+    if (products.length === 0) {
+      return res.status(404).json({ error: 'Không tìm thấy sản phẩm.' });
+    }
+
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Đã có lỗi xảy ra khi tìm kiếm sản phẩm.' });
   }
 });
 
