@@ -98,7 +98,7 @@ const SanPham = mongoose.model(
   new mongoose.Schema({
     TenSanPham: String,
     Gia: Number,
-    DonVi: String,
+    SoLuong: Number,
     XuatSu: String,
   })
 );
@@ -286,7 +286,7 @@ app.post('/SanPham', async (req, res) => {
   const data_SanPham = new SanPham({
     TenSanPham: req.body.TenSanPham,
     Gia: req.body.Gia,
-    DonVi: req.body.DonVi,
+    SoLuong: req.body.SoLuong,
     XuatSu: req.body.XuatSu,
   });
 
@@ -459,6 +459,23 @@ const port = process.env.PORT;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Lấy dữ liệu của tất cả sản phẩm
+app.get('/api/products', async (req, res) => {
+  try {
+    // Lấy tất cả sản phẩm từ cơ sở dữ liệu
+    const products = await SanPham.find();
+
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Đã có lỗi xảy ra khi lấy dữ liệu sản phẩm.' });
+  }
+});
+
+
+
+
+
 // Register
 app.post('/api/register', async (req, res) => {
   const { TenTaiKhoan, MatKhau, HoTen, GioiTinh, NamSinh, SDT, Email } =
@@ -548,33 +565,33 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Thêm sản phẩm vào giỏ hàng
+// Thêm sản phẩm vào giỏ hàng dựa vào tên sản phẩm
 app.post('/api/cart/add', async (req, res) => {
   const userId = req.body.userId;
-  const productId = req.body.productId;
+  const productName = req.body.productName;
   const quantity = req.body.quantity;
-
-  // Kiểm tra xem sản phẩm có tồn tại không
-  const product = await SanPham.findById(productId);
-
-  if (!product) {
-    return res.status(404).json({ error: 'Sản phẩm không tồn tại.' });
-  }
 
   // Tìm giỏ hàng của người dùng
   let gioHang = await GioHang.findOne({ MaThanhVien: userId });
 
   if (!gioHang) {
-    // Nếu giỏ hàng không tồn tại, hãy tạo một giỏ hàng mới
+    // Nếu giỏ hàng không tồn tại thì tạo một giỏ hàng mới
     gioHang = new GioHang({
       MaThanhVien: userId,
       items: [],
     });
   }
 
+  // Kiểm tra xem sản phẩm có tồn tại không dựa vào tên sản phẩm
+  const product = await SanPham.findOne({ TenSanPham: productName });
+
+  if (!product) {
+    return res.status(404).json({ error: 'Sản phẩm không tồn tại.' });
+  }
+
   // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
   const itemIndex = gioHang.items.findIndex(
-    (item) => item.MaSanPham.toString() === productId
+    (item) => item.MaSanPham.toString() === product._id.toString()
   );
 
   if (itemIndex !== -1) {
@@ -582,7 +599,7 @@ app.post('/api/cart/add', async (req, res) => {
     gioHang.items[itemIndex].SoLuong += quantity;
   } else {
     // Nếu sản phẩm chưa có trong giỏ hàng, thêm sản phẩm mới vào
-    gioHang.items.push({ MaSanPham: productId, SoLuong: quantity });
+    gioHang.items.push({ MaSanPham: product._id, SoLuong: quantity });
   }
 
   // Lưu giỏ hàng
@@ -590,6 +607,42 @@ app.post('/api/cart/add', async (req, res) => {
 
   res.json(gioHang);
 });
+
+// Xóa sản phẩm khỏi giỏ hàng
+app.post('/api/cart/remove', async (req, res) => {
+  const userId = req.body.userId;
+  const productId = req.body.productId;
+
+  try {
+    // Tìm giỏ hàng của người dùng
+    const gioHang = await GioHang.findOne({ MaThanhVien: userId });
+
+    if (!gioHang) {
+      return res.status(404).json({ error: 'Giỏ hàng không tồn tại.' });
+    }
+
+    // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
+    const itemIndex = gioHang.items.findIndex(
+      (item) => item.MaSanPham.toString() === productId
+    );
+
+    if (itemIndex === -1) {
+      return res.status(404).json({ error: 'Sản phẩm không tồn tại trong giỏ hàng.' });
+    }
+
+    // Xóa sản phẩm khỏi giỏ hàng
+    gioHang.items.splice(itemIndex, 1);
+
+    // Lưu giỏ hàng sau khi xóa sản phẩm
+    await gioHang.save();
+
+    res.json(gioHang);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Đã có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng.' });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
