@@ -599,11 +599,23 @@ app.post('/api/cart/add', async (req, res) => {
     gioHang.items.push({ MaSanPham: product._id, SoLuong: quantity });
   }
 
+  // Tạo một chi tiết giỏ hàng mới
+  const chiTietGioHang = new ChiTietGioHang({
+    MaGioHang: gioHang._id,
+    MaSanPham: product._id,
+    SoLuongHang: quantity
+  });
+
+  // Lưu chi tiết giỏ hàng
+  await chiTietGioHang.save();
+
   // Lưu giỏ hàng
   await gioHang.save();
 
   res.json(gioHang);
 });
+
+
 
 // Xóa sản phẩm khỏi giỏ hàng
 app.post('/api/cart/remove', async (req, res) => {
@@ -639,25 +651,19 @@ app.post('/api/cart/remove', async (req, res) => {
     res.status(500).json({ error: 'Đã có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng.' });
   }
 });
-// search theo tên -- đang lỗi -- chưa fix
-app.get('/api/products/search', async (req, res) => {
-  const productName = req.query.name; // Lấy tên sản phẩm từ query parameter
+// search theo tên 
+app.post('/api/search', async (req, res) => {
+  const tuKhoa = req.body.tuKhoa; // Nhận từ khóa tìm kiếm từ request body
 
   try {
-    const products = await SanPham.find({
-      TenSanPham: { $regex: productName, $options: 'i' }, // Sử dụng regex và tắt sự phân biệt chữ hoa chữ thường
-    });
-
-    if (products.length === 0) {
-      return res.status(404).json({ error: 'Không tìm thấy sản phẩm.' });
-    }
-
-    res.json(products);
+    const ketQua = await SanPham.find({ TenSanPham: { $regex: new RegExp(tuKhoa, 'i') } });
+    res.json(ketQua);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Đã có lỗi xảy ra khi tìm kiếm sản phẩm.' });
+    res.status(500).json({ error: 'Lỗi khi tìm kiếm sản phẩm.' });
   }
 });
+
 
 
 app.listen(port, () => {
